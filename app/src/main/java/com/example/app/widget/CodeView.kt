@@ -9,34 +9,29 @@ import android.util.TypedValue
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
 import com.example.app.R
-import com.example.core.utils.Utils
 import com.example.core.utils.dp2px
 import java.util.*
 
 /**
  * Created by huan on 2020/4/6.
  */
-class CodeView: AppCompatTextView {
-
-    constructor(context: Context) : this(context, null) {
-
+class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : AppCompatTextView (context, attrs) {
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = getContext().getColor(R.color.colorAccent)
+        strokeWidth = 6f.dp2px()
     }
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+    init {
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         gravity = Gravity.CENTER
         setBackgroundColor(getContext().getColor(R.color.colorPrimary))
         setTextColor(Color.WHITE)
 
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = getContext().getColor(R.color.colorAccent)
-        paint.strokeWidth = dp2px(6f)
 
         updateCode()
     }
-
-    private val paint = Paint()
 
     private val codeList = arrayOf("kotlin",
             "android",
